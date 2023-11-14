@@ -1,6 +1,6 @@
-enum Status{
-    "Livrée" = 1,
-    "En attente" = 2,
-    "Envoyée" = 3,
-    "Récupérée" = 0,
+export enum Status{
+    "En attente" = 0,
+    "Envoyée" = 1,
+    "Livrée" = 2,
+    "Récupérée" = 3,
 }

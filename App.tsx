@@ -1,9 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native';
 import BottomNavigation from './src/navigation/BottomNavigation';
+import BookProvider from './src/provider/BookProvider';
 
 export default function App() {
   return (
-    <BottomNavigation></BottomNavigation>
+    <BookProvider>
+      <BottomNavigation></BottomNavigation>
+    </BookProvider>
   );
 }
 

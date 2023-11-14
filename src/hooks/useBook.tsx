@@ -53,7 +53,7 @@ const useBook = (initialState: Book[]) => {
         return;
       }
       dispatch({
-        type: "REMOVE_BOOK",
+        type: "DELETE_BOOK",
         id:id,
       });
     }

@@ -1,4 +1,5 @@
 import BookOrder from "./bookOrder";
+import { Status } from "./status";
 
 export default interface Order{
     id: Number;

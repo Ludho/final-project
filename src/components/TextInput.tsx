@@ -6,6 +6,7 @@ interface Props{
     value: string,
     onChangeText: Function,
     label: string,
+    numeric?:boolean
 }
 
 const CustomTextInput = (props: Props) => {
@@ -14,8 +15,9 @@ const CustomTextInput = (props: Props) => {
     <Text style={styles.label}>{props.label}</Text>
     <TextInput 
         placeholder={props.placeholder}
+        keyboardType={props.numeric?'numeric':'default'}
         value={props.value}
-        onChangeText={(e)=>props.onChangeText(e)}
+        onChangeText={(e)=>props.onChangeText(props.numeric?Number(e):e)}
     />
     </View>
 

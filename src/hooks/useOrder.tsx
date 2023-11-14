@@ -1,35 +1,38 @@
 import { useReducer } from "react";
-import { Alert } from "react-native";
 import Order from "../models/order";
+import BookOrder from "../models/bookOrder";
+import { Status } from "../models/status";
 
 // reducers.js
-type orderAction = "ADD_ORDER"|"EDIT_ORDER"|"DELETE_ORDER"
+type orderAction = "CREATE_ORDER"|"ADD_BOOK"|"EDIT_TIME_ORDER"|"EDIT_STATUS_ORDER"
 
 
 const ordersReducer = (
     orders: Order[], 
-    action: {type:orderAction} & Partial<Order>)=>{
+    action: {type:orderAction} & Partial<Order> & {bookOrder: BookOrder})=>{
   switch (action.type) {
-    case "ADD_ORDER":
-        return [...orders, { order_id: action.,
-          order_date: action.or,
-          date: "21/07/2021",
-          customer_id: 1,
-          book_id: 1,
-          book_name: "Werner - Das muss kesseln!!!",
-          quantity: 90,
-          satus: 2, 
-          id: orders.length + 1 }];
-    case "EDIT_ORDER":
+    case "CREATE_ORDER":
+        return [...orders, { 
+          date: (new Date).toLocaleDateString("en-GB"),
+          status: 0,
+          books:[],
+          id: orders.length + 1 }].sort((order)=>{if(order.status==Status['En attente']){return -1}else return 1});
+    case "EDIT_STATUS_ORDER":
         return orders.map((order) => {
             if (order.id === action.id) {
-              return { ...order, ...action};
+              return { ...order, status: action.status, date: (new Date).toLocaleDateString("en-GB")};
             } else {
               return order;
             }
           });
-    case "DELETE_ORDER":
-        return orders.filter((item) => item.id !== action.id);
+    case "ADD_BOOK":
+        return orders.map((order) => {
+          if (order.status === 0) {
+            return { ...order, books: [...order.books,action.bookOrder], date: (new Date).toLocaleDateString("en-GB")};
+          } else {
+            return order;
+          }
+        });
   }
 }
 
@@ -41,42 +44,41 @@ const useOrder = (initialState: Order[]) => {
     );
 
 
-    const addOrder = (order: Order) => {
-      if (!order.category) Alert.alert("Enter a category", "");
-      if (!order.title) Alert.alert("Enter a title", "");
-      if (!order.description) Alert.alert("Enter a description", "");
-
+    const createOrder = () => {
       dispatch({
-        type: "ADD_ORDER",
-        title: order.title,
-        category: order.category,
-        description: order.description
+        type: "CREATE_ORDER",
       });
     }
-  
-    const removeOrder = (id: Order["id"]) => {
-      if (!orders.find((item: Order) => item.id === id)) {
-        Alert.alert("cette recette n'existe pas");
-        return;
-      }
+
+    const updateOrderTime = (id: Number) => {
       dispatch({
-        type: "REMOVE_ORDER",
+        type: "EDIT_TIME_ORDER",
         id:id,
       });
     }
 
-    const editOrder = (order :Partial<Order>) => {
+    const addBook = (bookOrder: BookOrder) => {
       dispatch({
-        type: "EDIT_ORDER",
-        ...order
+        type: "ADD_BOOK",
+        bookOrder:bookOrder,
       });
     }
 
+    const updateStatus = (id: Number, status: Number) => {
+      dispatch({
+        type: "EDIT_STATUS_ORDER",
+        id: id,
+        status: status,
+      });
+    }
+
+    
   
     return {
-      addOrder,
-      removeOrder,
-      editOrder,
+      createOrder,
+      updateOrderTime,
+      updateStatus,
+      addBook,
       orders,
     };
   }

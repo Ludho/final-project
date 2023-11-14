@@ -16,9 +16,10 @@ const BottomNavigation = () => {
             <Tab.Navigator
                     initialRouteName="Order"
                     screenOptions={{
-                        tabBarStyle: { backgroundColor: '#039FE1' },
+                        tabBarStyle: { backgroundColor: '#039FE1',height: 80 },
                         tabBarActiveTintColor: '#FFFFFF',
-                        tabBarInactiveTintColor: '#000000'
+                        tabBarInactiveTintColor: '#000000',
+                        
                       }}
                 >
                 <Tab.Screen name="Order" component={Order} 
@@ -30,9 +31,10 @@ const BottomNavigation = () => {
                         headerTitleStyle: {
                             color: 'white'
                         },
+                        tabBarLabelStyle:{fontSize:16},
                         tabBarLabel: 'Commandes',
-                        tabBarIcon: ({color, size}) => (
-                          <MaterialIcons name="menu-book"color={color} size={size} />
+                        tabBarIcon: ({color}) => (
+                          <MaterialIcons name="menu-book"color={color} size={35} />
                         ),
                       }}
                 />
@@ -45,9 +47,10 @@ const BottomNavigation = () => {
                         headerTitleStyle: {
                             color: 'white'
                         },
+                        tabBarLabelStyle:{fontSize:16},
                         tabBarLabel: 'Publications',
-                        tabBarIcon: ({color, size}) => (
-                          <MaterialIcons name="my-library-books"color={color} size={size} />
+                        tabBarIcon: ({color}) => (
+                          <MaterialIcons name="my-library-books"color={color} size={35} />
                         ),
                         headerRight: () => (
                             <Ionicons size={25} color='white' style={{paddingEnd:10}} name='menu' onPress={()=>{alert('This is a button!')}}></Ionicons>
@@ -63,9 +66,10 @@ const BottomNavigation = () => {
                         headerTitleStyle: {
                             color: 'white'
                         },
+                        tabBarLabelStyle:{fontSize:16},
                         tabBarLabel: 'Répertoire',
-                        tabBarIcon: ({color, size}) => (
-                          <FontAwesome name="user"color={color} size={size} />
+                        tabBarIcon: ({color}) => (
+                          <FontAwesome name="user"color={color} size={35} />
                         ),
                       }}
                 />
