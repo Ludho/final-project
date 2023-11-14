@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet, View, Text, Modal, Pressable, Alert, TextInput } from "react-native";
-import CustomTextInput from "../components/TextInput";
-import { BookContext } from "../provider/BookProvider";
-import Book from "../models/book";
+import CustomTextInput from "../TextInput";
+import { BookContext } from "../../provider/BookProvider";
+import Book from "../../models/book";
 
 interface Props{
     show: boolean,
@@ -17,8 +17,10 @@ const BookModal = (props:Props) => {
     const BookService = useContext(BookContext).bookService;
 
     const closeForm=()=>{
-        setTitle('');
-        setReference('');
+        if(!props.book){
+          setTitle('');
+          setReference('');
+        }
         props.setShow(false)
     }
 

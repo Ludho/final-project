@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import Book from '../models/book';
 import {StyleSheet, FlatList, ListRenderItemInfo, View } from 'react-native';
 import BookCard from './BookCard';
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: '10%',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingBottom: 30,
+        paddingBottom: 100,
 
     }
   });

@@ -3,13 +3,13 @@ import {StyleSheet, Text, View } from 'react-native'
 import PublicationsList from '../components/PublicationsList'
 import { AntDesign } from '@expo/vector-icons';
 import BookProvider, { BookContext } from '../provider/BookProvider';
-import BookModal from '../modals/BookModal';
+import BookModal from '../components/modals/BookModal';
 import { Searchbar } from 'react-native-paper';
 
 
 
 const Publication = () => {
-    const show = useContext(BookContext).openModal;
+    const [show, setShow] = useState(false)
     const [filter, setFilter] = useState('')
 
   return (
