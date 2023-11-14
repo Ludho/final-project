@@ -1,22 +1,38 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, View, Text, Modal, Pressable, Alert, TextInput } from "react-native";
 import CustomTextInput from "../components/TextInput";
+import { BookContext } from "../provider/BookProvider";
+import Book from "../models/book";
 
 interface Props{
     show: boolean,
     setShow: Function,
+    book?: Book
 }
 
 const BookModal = (props:Props) => {
 
-    const [title,setTitle]= useState('');
-    const [reference,setReference]= useState('');
+    const [title,setTitle]= useState(props.book?props.book.title:'');
+    const [reference,setReference]= useState(props.book?props.book.reference:'');
+    const BookService = useContext(BookContext).bookService;
 
     const closeForm=()=>{
         setTitle('');
         setReference('');
         props.setShow(false)
     }
+
+    const createBook=()=>{
+        BookService?.addBook({title:title, reference:reference})
+        alert("Le livre a été ajouté");
+        closeForm();
+    }
+
+    const updateBook=()=>{
+      BookService?.editBook({id: props.book?.id, title: title, reference: reference})
+      alert("Le livre a été modifié");
+      closeForm();
+  }
     
   return (
     
@@ -46,7 +62,7 @@ const BookModal = (props:Props) => {
                 onChangeText={setReference}/>
           <Pressable
             style={[styles.button, styles.buttonClose]}
-            onPress={() => closeForm()}
+            onPress={() => {props.book?updateBook():createBook()}}
           >
             <Text style={styles.textStyle}>Enregistrer</Text>
           </Pressable>

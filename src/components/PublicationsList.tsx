@@ -1,12 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Book from '../models/book';
 import {StyleSheet, FlatList, ListRenderItemInfo, View } from 'react-native';
 import BookCard from './BookCard';
 import { BookContext } from '../provider/BookProvider';
 
-const PublicationsList = () => {
+interface Props{
+  filter: string
+}
+
+const PublicationsList = (props: Props) => {
 
 const BookService = useContext(BookContext).bookService;
+
+
 
 
 const rendBook = (itemData: ListRenderItemInfo<Book>) => {
@@ -16,7 +22,7 @@ const rendBook = (itemData: ListRenderItemInfo<Book>) => {
   return (
     <View style={styles.container}>
         <FlatList
-            data={BookService?.books}
+            data={props.filter==""?BookService?.books:BookService?.books.filter((book)=>{return book.title.includes(props.filter)})}
             renderItem={rendBook}
             showsVerticalScrollIndicator={false}
         />
@@ -29,6 +35,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: '10%',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingBottom: 30,
 
     }
   });
