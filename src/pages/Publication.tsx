@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {StyleSheet, View } from 'react-native'
-import PublicationsList from '../components/PublicationsList'
+import PublicationsList from '../components/Publication/PublicationsList'
 import { AntDesign } from '@expo/vector-icons';
 import BookModal from '../components/modals/BookModal';
 import { Searchbar } from 'react-native-paper';

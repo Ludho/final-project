@@ -24,7 +24,7 @@ const DateFormat = (props: Props) => {
     }
 
   return (
-    <View>
+    <View style={{marginLeft:'auto'}}>
         <Text style={styles.text}>{renderText(props.status)}</Text>
         <Text style={styles.text}>{props.date}</Text>
     </View>

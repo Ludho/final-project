@@ -1,17 +1,20 @@
 import React, { useState } from "react";
-import {StyleSheet, Text } from "react-native";
+import {StyleSheet, Text, View } from "react-native";
 import OrderProvider from "../provider/OrderProvider";
-import OrderList from "../components/OrderList";
+import OrderList from "../components/Order/OrderList";
 import { AntDesign } from '@expo/vector-icons';
 import OrderModal from "../components/modals/OrderModal";
+import { StackScreenProps } from "@react-navigation/stack";
 
-const Order = () => {
+type Props = StackScreenProps<StackOrderParamList, 'OrderStack'>;
+
+const Order = ({navigation}: Props) => {
   const [show, setShow] = useState(false)
   
   return (
-    <OrderProvider>
+    <View style={{height:'100%'}}>
       <OrderModal show={show} setShow={setShow}></OrderModal>
-      <OrderList/>
+      <OrderList navigation={navigation}/>
       <AntDesign
         style={styles.icon}
         name="plussquare"
@@ -21,7 +24,7 @@ const Order = () => {
           setShow(true);
         }}
       ></AntDesign>
-    </OrderProvider>
+    </View>
   );
 };
 

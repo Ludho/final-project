@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
-import Book from '../models/book';
+import Book from '../../models/book';
 import {StyleSheet, FlatList, ListRenderItemInfo, View } from 'react-native';
 import BookCard from './BookCard';
-import { BookContext } from '../provider/BookProvider';
+import { BookContext } from '../../provider/BookProvider';
 
 interface Props{
   filter: string
@@ -22,7 +22,7 @@ const rendBook = (itemData: ListRenderItemInfo<Book>) => {
   return (
     <View style={styles.container}>
         <FlatList
-            data={props.filter==""?BookService?.books:BookService?.books.filter((book)=>{return book.title.includes(props.filter)})}
+            data={props.filter==""?BookService?.books:BookService?.books.filter((book)=>{return book.title.toLocaleLowerCase().includes(props.filter.toLocaleLowerCase().trim())})}
             renderItem={rendBook}
             showsVerticalScrollIndicator={false}
         />

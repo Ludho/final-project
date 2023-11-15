@@ -5,10 +5,28 @@ import Publication from '../pages/Publication';
 import Repository from '../pages/Repository';
 import { NavigationContainer } from '@react-navigation/native';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
+import { createStackNavigator } from '@react-navigation/stack';
+import OrderDetail from '../pages/OrderDetail';
 
 
 const Tab = createBottomTabNavigator<MyStackParamList>();
+const Stack = createStackNavigator<StackOrderParamList>();
 
+
+const StackNavigator= () => {
+    return (
+      <Stack.Navigator
+        initialRouteName="OrderStack"
+        screenOptions={{
+            headerShown: false
+          }}
+      >
+        <Stack.Screen
+         name="OrderStack" component={Order} />
+        <Stack.Screen name="OrderDetail" component={OrderDetail} />
+      </Stack.Navigator>
+    );
+  }
 
 const BottomNavigation = () => {
     return (
@@ -22,7 +40,7 @@ const BottomNavigation = () => {
                         
                       }}
                 >
-                <Tab.Screen name="Order" component={Order} 
+                <Tab.Screen name="Order" component={StackNavigator} 
                     options={{
                         title: 'Commandes',
                         headerStyle: {
@@ -35,6 +53,9 @@ const BottomNavigation = () => {
                         tabBarLabel: 'Commandes',
                         tabBarIcon: ({color}) => (
                           <MaterialIcons name="menu-book"color={color} size={35} />
+                        ),
+                        headerRight: () => (
+                            <Ionicons size={25} color='white' style={{paddingEnd:10}} name='menu' onPress={()=>{alert('This is a button!')}}></Ionicons>
                         ),
                       }}
                 />

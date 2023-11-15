@@ -1,18 +1,19 @@
 import React, { useContext } from 'react'
-import Order from '../models/order';
+import Order from '../../models/order';
 import {StyleSheet, FlatList, ListRenderItemInfo, View } from 'react-native';
 import OrderCard from './OrderCard';
-import { OrderContext } from '../provider/OrderProvider';
-import { Status } from '../models/status';
+import { OrderContext } from '../../provider/OrderProvider';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-const OrderList = () => {
+interface Props {
+  navigation: StackNavigationProp<StackOrderParamList, "OrderStack", undefined>
+}
+
+const OrderList = (props: Props) => {
     const OrderService = useContext(OrderContext).orderService;
 
-
-
-
     const rendOrder = (itemData: ListRenderItemInfo<Order>) => {
-        return <OrderCard order={itemData.item}></OrderCard>
+        return <OrderCard navigation={props.navigation} order={itemData.item}></OrderCard>
     }
     
       return (

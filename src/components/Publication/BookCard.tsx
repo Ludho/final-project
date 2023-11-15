@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react'
-import Book from '../models/book'
+import Book from '../../models/book'
 import { StyleSheet, Text, View } from 'react-native';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
-import { BookContext } from '../provider/BookProvider';
-import BookModal from './modals/BookModal';
+import { BookContext } from '../../provider/BookProvider';
+import BookModal from '../modals/BookModal';
 
 
 interface Props {
